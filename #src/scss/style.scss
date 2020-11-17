@@ -1,0 +1,348 @@
+@mixin font($font_name, $file_name, $weight, $style) {
+   @font-face {
+      font-family: $font_name;
+      font-display: swap;
+      src: url("../fonts/#{$file_name}.woff") format("woff"), url("../fonts/#{$file_name}.woff2") format("woff2");
+      font-weight: #{$weight};
+      font-style: #{$style};
+   }
+}
+@import "fonts";
+
+$border-def: 4px solid #1698d9;
+$top-color: #1698d9;
+
+$border-def-hover: 4px solid #2ea8e6;
+$top-color-hover: #2ea8e6;
+
+$border-act: 4px solid #d91667;
+$color-act: #d91667;
+
+$border-act-hover: 4px solid #e62e7b;
+$color-act-hover: #e62e7b;
+
+$color-disab: #b3b3b3;
+$border-disab: 4px solid #b3b3b3;
+
+* {
+   box-sizing: border-box;
+}
+
+.page {
+   background-color: #181818;
+   background-image: url(../img/bg-page.png);
+   background-position: left top;
+   background-size: auto;
+   background-repeat: repeat; 
+   margin: 0;
+   padding: 0;
+   overflow-x: hidden;
+   font-family: 'trebucher', sans-serif;
+   font-weight: 400;
+
+   &::before {
+      content: '';
+      z-index: -1;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      box-shadow: 
+         inset 0 500px 210px -250px rgba($color: #000000, $alpha: 0.8),
+         inset 0 -500px 210px -250px rgba($color: #000000, $alpha: 0.8);
+   }
+   ul, li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+   }
+   &__title{
+      font-family: 'Exo2', sans-serif;
+      font-weight: 100;
+      text-align: center;
+      font-size: 36px;
+      margin: 50px 0 23px;
+      color: #ffffff;
+   }
+}
+.page-inner{
+   display: flex;
+   height: 100vh;
+   justify-content: center;
+   flex-direction: column;
+}
+
+.container{
+   max-width: 1350px;
+   margin: 0 auto;
+   padding: 0 15px;
+}
+
+.catalog {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-wrap: wrap;
+
+   &__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 40px 25px;
+   }
+}
+
+@media screen and (max-width: 1230px) {
+   .container {
+      max-width: 1200px;
+   }
+   .catalog__item {
+      margin: 0 auto 25px;
+   }
+}
+@media screen and (max-width: 1035px) {
+   .catalog__item {
+      margin: 0 10px 25px;
+   }
+}
+
+.product {
+   &__body{
+      width: 320px;
+      cursor: pointer;
+      margin-bottom: 11px;
+      position: relative;
+      &::before{
+         content: '0,5';
+         color: #ffffff;
+         text-align: center;
+         font-size: 45px;
+         padding-top: 6px;
+         width: 81px;
+         height: 75px;
+         background-color: $top-color;
+         position: absolute;
+         border-radius: 50%;
+         bottom: 15px;
+         right: 15px;
+      }
+      .for-forty &::before{
+         content: '2';
+      }
+      .for-hundred &::before{
+         content: '5';
+      }
+      &::after{
+         content: 'кг';
+         position: absolute;
+         color: #ffffff;
+         font-size: 21px;
+         text-align: center;
+         bottom: 22px;
+         right: 45px;
+      }
+   }
+   &__header{
+      display: flex;
+      height: 44px;
+   }
+   &__corner {
+      width: 43px;
+      background: linear-gradient(-45deg,#f2f2f2, #f2f2f2 28.5px,#1698d9 0,#1698d9 32px,transparent 0);
+   }
+   &__rect{
+      flex-grow: 1;
+      background-color:  #f2f2f2;
+      border-top-right-radius: 12px;
+      border-top: $border-def;
+      border-right: $border-def;
+      padding: 17px 0px 8px 5px;
+   }
+   &__description{
+      font-size: 16px;
+   }
+   &__description-hover {
+      opacity: 0;
+      visibility: hidden;
+   }
+   &__main{
+      background-color:  #f2f2f2;
+      border-radius: 0 0 12px 12px;
+      border: $border-def;
+      border-top: none;
+      background-image: url(../img/cat.png);
+      background-position: left bottom;
+      background-size: auto;
+      background-repeat: no-repeat;
+      height: 436px;
+      padding: 0 0 0 45px;
+   }
+   &__title{
+      font-size: 48px;
+      line-height: 58px;
+      margin: 0 0 0 -2px;
+   }
+   &__with {
+      font-size: 24px;
+      font-weight: 700;
+      margin: -3px 0 15px 0;
+   }
+   &__list-item{
+      font-size: 14px;
+      color: #666666;
+   }
+   &__info{
+      color: #ffffff;
+      font-size: 13px;
+   }
+}
+   .is-def:hover.product{
+      &__body::before{
+         background-color: $top-color-hover;
+      }
+}
+         
+
+.product__body:hover .product{
+   &__corner{
+      background: linear-gradient(-45deg,#f2f2f2, #f2f2f2 28.5px, $top-color-hover 0, $top-color-hover 32px,transparent 0);
+   }
+   &__rect{
+      border-top: $border-def-hover;
+      border-right: $border-def-hover;
+   }
+   &__main{
+      border: $border-def-hover;
+      border-top: none;
+   }
+}
+
+.is-active .product{
+   &__corner{
+      background: linear-gradient(-45deg,#f2f2f2, #f2f2f2 28.5px, $color-act 0, $color-act 32px,transparent 0);
+   }
+   &__rect{
+      border-top: $border-act;
+      border-right: $border-act;
+   }
+   &__main{
+      border: $border-act;
+      border-top: none;
+   }
+   &__description-hover {
+      opacity: 0;
+      visibility: hidden;
+   }
+}
+
+.buy {
+   color: $top-color;
+   border-bottom: 1px dashed $top-color;
+   cursor: pointer;
+}
+
+.is-active.product{
+   &__body::before{
+      background-color: $color-act;
+   }
+}
+.is-active .product{
+   &__corner{
+      background: linear-gradient(-45deg,#f2f2f2, #f2f2f2 28.5px, $color-act 0, $color-act 32px,transparent 0);
+   }
+   &__rect{
+      border-top: $border-act;
+      border-right: $border-act;
+   }
+   &__main{
+      border: $border-act;
+      border-top: none;
+   }
+   &__description {
+      opacity: 1;
+      visibility: visible;
+      transition-property: opacity, visibility;
+      transition-delay: 1s;
+   }
+   &__description-hover {
+      margin-top: -20px;
+      color: $color-act-hover;
+      opacity: 0;
+      visibility: hidden;
+      transition-property: opacity, visibility;
+      transition-delay: 1s;
+
+   }
+}
+.is-active:hover.product{
+   &__body::before{
+      background-color: $color-act-hover;
+   }
+}
+
+.is-active:hover .product{
+   &__description {
+      opacity: 0;
+      visibility: hidden;
+      transition-property: opacity, visibility;
+      transition-delay: 1s;
+   }
+   &__description-hover {
+      color: $color-act-hover;
+      opacity: 1;
+      visibility: visible;
+      transition-property: opacity, visibility;
+      transition-delay: 1s;
+      
+   }
+   &__corner{
+      background: linear-gradient(-45deg,#f2f2f2, #f2f2f2 28.5px, $color-act-hover 0, $color-act-hover 32px,transparent 0);
+   }
+   &__rect{
+      border-top: $border-act-hover;
+      border-right: $border-act-hover;
+   }
+   &__main{
+      border: $border-act-hover;
+      border-top: none;
+   }
+}
+
+
+.is-disabled.product{
+   &__body{
+      color: #d4d4d4;
+      cursor: default;
+      user-select: none;
+      pointer-events: none;
+      &::before{
+         background-color: $color-disab;
+      }
+   }
+   
+}
+.is-disabled .product{
+   &__corner{
+      background: linear-gradient(-45deg,#f2f2f2, #f2f2f2 28.5px, $color-disab 0, $color-disab 32px,transparent 0);
+   }
+   &__rect{
+      border-top: $border-disab;
+      border-right: $border-disab;
+   }
+   &__main{
+      border: $border-disab;
+      border-top: none;
+      background-image: url(../img/ghost-cat.png);
+   }
+   &__list-item{
+      color: #d4d4d4
+   }
+   
+}
+.is-disabled ~ .product__footer{
+   .product__info{
+      color: #ffff66;
+   }
+}
+
+
+
