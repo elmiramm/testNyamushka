@@ -1,2 +1,2 @@
 # testNyamushka
-https://elmiramm.github.io/testNyamushka
+https://elmiramm.github.io/testNyamushka/
